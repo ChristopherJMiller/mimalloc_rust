@@ -11,6 +11,8 @@ fn main() {
     let target_family = env::var("CARGO_CFG_TARGET_FAMILY").expect("target_family not defined!");
     let target_arch = env::var("CARGO_CFG_TARGET_ARCH").expect("target_arch not defined!");
 
+    println!("{target_os} {target_family} {target_arch}");
+
     if env::var_os("CARGO_FEATURE_OVERRIDE").is_some() {
         // Overriding malloc is only available on windows in shared mode, but we
         // only ever build a static lib.
