@@ -1,5 +1,5 @@
 [package]
-name = "mimalloc"
+name = "mimalloc_wasi"
 version = "0.1.43"
 authors = [
     "Octavian Oncescu <octavonce@gmail.com>",
