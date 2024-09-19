@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, path::Path};
 
 fn main() {
     let mut build = cc::Build::new();
@@ -47,6 +47,15 @@ fn main() {
     } else {
         // Remove heavy debug assertions etc
         build.define("MI_DEBUG", "0");
+    }
+
+    if target_os.contains("wasi") {
+        let wasi_sdk_path = env::var("WASI_SDK_PATH").expect("wask_sdk_path not defined!");
+        let path = Path::new(&wasi_sdk_path);
+
+        build.compiler(path.join("bin").join("clang"));
+
+        build.flag("-matomics").flag("-mbulk-memory");
     }
 
     if build.get_compiler().is_like_msvc() {
